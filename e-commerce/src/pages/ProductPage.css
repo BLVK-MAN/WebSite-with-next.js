@@ -1,0 +1,122 @@
+.product-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-top: var(--spacing-4);
+    column-gap: var(--spacing-8);
+    row-gap: var(--spacing-8);
+    min-height: 80vh;
+}
+
+@media (min-width: 1024px) {
+    .product-page {
+        grid-template-columns: 1fr 1fr;
+        padding-top: var(--spacing-12);
+        column-gap: var(--spacing-16);
+    }
+}
+
+/* Image Section - Sticky on desktop */
+.product-gallery {
+    position: relative;
+}
+
+@media (min-width: 1024px) {
+    .product-gallery {
+        position: sticky;
+        top: 6rem;
+        /* 5rem header + 1rem padding */
+        height: fit-content;
+    }
+}
+
+.product-main-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/5;
+    /* Reference aspect ratio */
+    object-fit: cover;
+    display: block;
+    background-color: var(--color-zinc-50);
+}
+
+/* Details Section */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--spacing-12);
+}
+
+@media (min-width: 1024px) {
+    .product-details {
+        padding-top: var(--spacing-12);
+        max-width: 32rem;
+    }
+}
+
+.product-category {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-zinc-500);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-4);
+    display: block;
+}
+
+.product-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: var(--spacing-4);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--color-black);
+}
+
+@media (min-width: 768px) {
+    .product-title {
+        font-size: 4rem;
+        letter-spacing: -0.04em;
+    }
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-8);
+    color: var(--color-black);
+}
+
+.product-description {
+    margin-bottom: var(--spacing-12);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-zinc-600);
+    border-top: 1px solid var(--color-zinc-100);
+    padding-top: var(--spacing-8);
+}
+
+.add-to-cart-wrapper {
+    position: sticky;
+    bottom: var(--spacing-4);
+    background-color: var(--color-white);
+    padding-top: var(--spacing-4);
+    z-index: 10;
+}
+
+@media (min-width: 1024px) {
+    .add-to-cart-wrapper {
+        position: static;
+        padding-top: 0;
+    }
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    border-radius: 0;
+    /* Square buttons */
+    height: 3.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}

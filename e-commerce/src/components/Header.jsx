@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ShoppingBag, Heart, Menu, X } from 'lucide-react'
-import { useCart } from '../hooks/useCart'
-import { useWishlist } from '../hooks/useWishlist'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleCart } from '../store/cartSlice'
 import './Header.css'
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { toggle, totalItems } = useCart()
-  const { items: wishlistItems } = useWishlist()
+  const dispatch = useDispatch()
+
+  const { totalItems } = useSelector((state) => state.cart)
+  const wishlistItems = useSelector((state) => state.wishlist.items)
+
   const location = useLocation()
-  
+
   const isActive = (path) => location.pathname === path
 
   const handleNavClick = () => {
@@ -20,7 +23,7 @@ export function Header() {
   return (
     <header className="header">
       <div className="header__container">
-        <button 
+        <button
           className="header__mobile-menu"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
@@ -63,7 +66,7 @@ export function Header() {
             )}
           </Link>
 
-          <button onClick={toggle} className="header__action-button">
+          <button onClick={() => dispatch(toggleCart())} className="header__action-button">
             <ShoppingBag size={24} />
             {totalItems > 0 && (
               <span className="header__badge header__badge--count">

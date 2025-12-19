@@ -1,96 +1,91 @@
-
-import React from 'react'
-import { motion } from 'framer-motion'
-import { products } from '../data/products'
-import { ProductCard } from '../components/ProductCard'
-import { Button } from '../components/ui/Button'
-import { Link } from 'react-router-dom'
-import './HomePage.css'
+import React from 'react';
+import { products } from '../data/products';
+import { Button } from '../components/ui/Button';
+import { Link } from 'react-router-dom';
+import { ShoppingBag, Heart } from 'lucide-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../store/cartSlice';
+import { addItem as addItemToWishlist, removeItem as removeItemFromWishlist } from '../store/wishlistSlice';
+import './HomePage.css';
 
 export function HomePage() {
-  const featuredProducts = products.slice(0, 8)
+  const featuredProducts = products.slice(0, 8);
+  const dispatch = useDispatch();
+
+  const wishlistItems = useSelector((state) => state.wishlist.items);
+  const isItemInWishlist = (id) => wishlistItems.some((item) => item.id === id);
+
+  const handleWishlistClick = (e, product) => {
+    e.preventDefault(); // Prevent navigation to product page
+    e.stopPropagation();
+    if (isItemInWishlist(product.id)) {
+      dispatch(removeItemFromWishlist(product.id));
+    } else {
+      dispatch(addItemToWishlist(product));
+    }
+  };
+
+  const handleAddToCartClick = (e, product) => {
+    e.preventDefault(); // Prevent navigation to product page
+    e.stopPropagation();
+    dispatch(addItem(product));
+  };
 
   return (
     <div className="home-page">
       <section className="hero">
-        <div className="hero__background">
-          <img
-            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2000&auto=format&fit=crop"
-            alt="Fashion Editorial"
-          />
-        </div>
         <div className="hero__content">
-          <div className="hero__text">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="hero__season"
-            >
-              Spring / Summer 2024
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="hero__title"
-            >
-              Urban
-              <br />
-              Minimalist
-            </motion.h1>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <Link to="/catalog">
-                <Button size="lg" className="hero__cta">
-                  Shop Collection
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <section className="featured">
-        <div className="featured__header">
-          <div>
-            <h2 className="featured__title">
-              Curated
-              <br />
-              Selection
-            </h2>
-          </div>
-          <Link to="/catalog" className="featured__view-all">
-            View All Products
-          </Link>
-        </div>
-
-        <div className="featured__grid">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-
-        <div className="featured__view-all-mobile">
+          <span className="hero__subtitle">SPRING / SUMMER 2024</span>
+          <h1 className="hero__title">URBAN<br />MINIMALIST</h1>
           <Link to="/catalog">
-            <Button variant="outline" className="featured__view-all-btn">
-              View All Products
-            </Button>
+            <Button size="lg" variant="white">Shop Collection</Button>
           </Link>
         </div>
       </section>
 
-      <section className="editorial-banner">
-        <div className="editorial-banner__content">
-          <h2 className="editorial-banner__quote">
-            "Style is a way to say who you are without having to speak."
-          </h2>
-          <p className="editorial-banner__author">- Rachel Zoe</p>
+      <section className="container products-section">
+        <h2>Curated Selection</h2>
+        <div className="products-grid">
+          {featuredProducts.map((product) => (
+            <div key={product.id} className="product-card">
+              <div className="product-card__image-wrapper">
+                <Link to={`/product/${product.id}`} className="product-card__image-container">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="product-card__image"
+                  />
+                </Link>
+                <div className="product-card__actions">
+                  <button
+                    className={`action-btn ${isItemInWishlist(product.id) ? 'active' : ''}`}
+                    onClick={(e) => handleWishlistClick(e, product)}
+                    aria-label="Add to wishlist"
+                  >
+                    <Heart size={20} fill={isItemInWishlist(product.id) ? "currentColor" : "none"} />
+                  </button>
+                  <button
+                    className="action-btn"
+                    onClick={(e) => handleAddToCartClick(e, product)}
+                    aria-label="Add to cart"
+                  >
+                    <ShoppingBag size={20} />
+                  </button>
+                </div>
+              </div>
+              <div className="product-card__info">
+                <div>
+                  <h3 className="product-card__title">
+                    <Link to={`/product/${product.id}`}>{product.title}</Link>
+                  </h3>
+                  <p className="product-card__category">{product.category}</p>
+                </div>
+                <span className="product-card__price">${product.price}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     </div>
-  )
+  );
 }
