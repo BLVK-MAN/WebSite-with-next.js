@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FAFAF9;
+  --foreground: #0F172A;
+  /* Slate 900 for primary text */
+
+  /* Custom Palette */
+  --slate-50: #FAFAF9;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-600: #475569;
+  --slate-900: #0F172A;
+
+  --orange-100: #FFEDD5;
+  --orange-600: #EA580C;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Extending theme colors */
+  --color-primary: var(--slate-900);
+  --color-secondary: var(--slate-600);
+  --color-accent: var(--orange-600);
+  --color-accent-light: var(--orange-100);
+  --color-border: var(--slate-200);
+  --color-surface: var(--slate-50);
+  --color-surface-hover: var(--slate-100);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
