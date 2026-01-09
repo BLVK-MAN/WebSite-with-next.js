@@ -1,0 +1,213 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-zinc-100);
+}
+
+.header__container {
+  margin: 0 auto;
+  display: flex;
+  height: 5rem;
+  max-width: 80rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .header__container {
+    padding: 0 var(--spacing-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__container {
+    padding: 0 var(--spacing-8);
+  }
+}
+
+/* Mobile Menu Button */
+.header__mobile-menu {
+  padding: var(--spacing-2);
+  margin-left: calc(var(--spacing-2) * -1);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-base);
+}
+
+.header__mobile-menu:hover {
+  color: var(--color-red-600);
+}
+
+@media (min-width: 1024px) {
+  .header__mobile-menu {
+    display: none;
+  }
+}
+
+/* Logo */
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  text-decoration: none;
+}
+
+.header__logo-text {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+.header__logo-accent {
+  color: var(--color-red-600);
+}
+
+/* Navigation */
+.header__nav {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+@media (min-width: 1024px) {
+  .header__nav {
+    display: flex;
+  }
+}
+
+.header__nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-black);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.header__nav-link:hover {
+  color: var(--color-red-600);
+}
+
+.header__nav-link--active {
+  color: var(--color-red-600);
+}
+
+/* Actions */
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.header__action-button {
+  position: relative;
+  padding: var(--spacing-2);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-black);
+  transition: color var(--transition-base);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.header__action-button:hover {
+  color: var(--color-red-600);
+}
+
+/* Badges */
+.header__badge {
+  position: absolute;
+}
+
+.header__badge--dot {
+  right: 0.25rem;
+  top: 0.25rem;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-red-600);
+  box-shadow: 0 0 0 2px var(--color-white);
+}
+
+.header__badge--count {
+  right: -0.25rem;
+  top: -0.25rem;
+  display: flex;
+  height: 1.25rem;
+  width: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background-color: var(--color-red-600);
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--color-white);
+  box-shadow: 0 0 0 2px var(--color-white);
+}
+
+/* Mobile Dropdown Menu */
+.header__mobile-dropdown {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-zinc-100);
+  padding: var(--spacing-4);
+  gap: var(--spacing-2);
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__mobile-dropdown {
+    display: none;
+  }
+}
+
+.header__mobile-link {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-black);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.header__mobile-link:hover {
+  background-color: var(--color-zinc-50);
+  color: var(--color-red-600);
+}
+
+.header__mobile-link--active {
+  background-color: var(--color-zinc-100);
+  color: var(--color-red-600);
+}

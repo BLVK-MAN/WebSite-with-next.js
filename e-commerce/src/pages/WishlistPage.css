@@ -1,0 +1,44 @@
+.wishlist-page {
+    padding-top: var(--spacing-8);
+    padding-bottom: var(--spacing-20);
+    min-height: 80vh;
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+.wishlist-page h1 {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-12);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    color: var(--color-black);
+}
+
+.wishlist-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    text-align: center;
+}
+
+.wishlist-empty h1 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-4);
+}
+
+.wishlist-empty p {
+    font-size: 1.125rem;
+    color: var(--color-zinc-500);
+    margin-bottom: var(--spacing-8);
+    max-width: 24rem;
+    line-height: 1.5;
+}
+
+/* Grid is handled by global .products-grid but we ensure spacing here */
+.wishlist-page .products-grid {
+    margin-top: var(--spacing-8)
+}
